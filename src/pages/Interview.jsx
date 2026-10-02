@@ -98,7 +98,8 @@ export function Interview() {
     speechRequestRef.current = controller;
 
     try {
-      const response = await fetch('/api/speech', {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/speech`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: currentQuestionText }),

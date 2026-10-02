@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { Setup } from './pages/Setup';
@@ -10,6 +10,8 @@ import { QuestionBank } from './pages/QuestionBank';
 import { Profile } from './pages/Profile';
 import { getStoredTheme, setStoredTheme } from './utils/storage';
 import { Bot, Heart, Sparkles } from 'lucide-react';
+
+const Router = import.meta.env.BASE_URL === '/' ? BrowserRouter : HashRouter;
 
 function App() {
   const [theme, setTheme] = useState(() => getStoredTheme());
@@ -31,7 +33,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <Router>
       <div className={`min-h-screen flex flex-col font-sans selection:bg-[#FFD633] selection:text-black ${theme}`}>
         
         {/* Top Sticky Navigation */}
@@ -92,7 +94,7 @@ function App() {
         </footer>
 
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

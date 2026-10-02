@@ -103,3 +103,19 @@ Keep the API running alongside the Vite development server. Use **Listen** in th
 npm.cmd run build
 ```
 Static artifacts will be compiled into the `dist/` directory.
+
+## Hosting
+
+The GitHub Actions workflow publishes the frontend to GitHub Pages at:
+`https://sreelakshmita116-lgtm.github.io/Zero_syntaxx_22/`
+
+In the repository's **Settings → Pages**, set the build and deployment source to **GitHub Actions**. Pushes to `main` then build and publish the site automatically.
+
+GitHub Pages only hosts static files, so the Edge TTS API is configured separately through the included `render.yaml` blueprint:
+
+1. In Render, create a new Blueprint and select this repository.
+2. After the `intervue-ai-tts` service is live, copy its URL.
+3. In GitHub, open **Settings → Secrets and variables → Actions → Variables** and add `VITE_API_BASE_URL` with the service URL, for example `https://intervue-ai-tts.onrender.com`.
+4. Rerun the Pages workflow or push a new commit so the frontend build can use the API URL.
+
+Without `VITE_API_BASE_URL`, the site itself loads, but question audio will not reach the hosted TTS service.
